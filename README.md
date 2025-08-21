@@ -16,6 +16,12 @@ This project provides a PowerShell/PowerCLI script `vmware-vm-audit-dod-stig.ps1
 
 ---
 
+Disclaimer
+
+This script is provided "as is", without any warranty of any kind. Use it at your own risk. You are solely responsible for reviewing, testing, and implementing it in your own environment.
+
+---
+
 ## Requirements
 
 - PowerShell 7+ (or Windows PowerShell 5.1)  
@@ -35,10 +41,10 @@ Clone or download this repository, then run the script:
 ---
 
 Parameters
-* -vCenter (mandatory): vCenter Server FQDN or IP.
-* -VMName (optional): audit only one VM; if omitted, all VMs are checked.
-* -IncludeTemplates: include VM templates in the audit.
-* -IncludePoweredOff: include powered-off VMs (default: on).
+* - vCenter (mandatory): vCenter Server FQDN or IP.
+* - VMName (optional): audit only one VM; if omitted, all VMs are checked.
+* - IncludeTemplates: include VM templates in the audit.
+* - IncludePoweredOff: include powered-off VMs (default: on).
 
 ---
 
