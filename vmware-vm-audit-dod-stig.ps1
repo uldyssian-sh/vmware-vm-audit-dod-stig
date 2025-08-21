@@ -1,7 +1,7 @@
 ﻿<#
 ===============================================================================
  Project : vmware-vm-audit-dod-stig
- Author  : uldyssian-sh
+ Author  : Paladin alias LT
  Version : 1.1
  Target  : VMware vSphere 8
  File    : vmware-vm-audit-dod-stig.ps1
@@ -205,3 +205,4 @@ $results = foreach ($vm in $vms) {
 # --- Console output only ---------------------------------------------------
 # Print a full table with all columns. No CSV is produced.
 $results | Format-Table -AutoSize
+
