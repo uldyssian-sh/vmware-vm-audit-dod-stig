@@ -1,6 +1,6 @@
 # vmware-vm-audit-dod-stig
 
-Author: **uldyssian-sh**  
+Author: **Paladin alias LT**  
 Target: **VMware vSphere 8**  
 Version: **1.1**
 
