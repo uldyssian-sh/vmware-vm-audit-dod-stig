@@ -1,7 +1,6 @@
 # vmware-vm-audit-dod-stig
 
 Author: **LT**  
-Target: **VMware vSphere 8**  
 Version: **1.1**
 
 ---
