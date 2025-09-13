@@ -1,57 +1,181 @@
-# vmware-vm-audit-dod-stig
+# VMware VM DoD STIG Audit Tool
 
-Author: **LT**  
-Version: **1.1**
+[![GitHub release](https://img.shields.io/github/release/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/releases)
+[![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
+[![GitHub license](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/blob/main/LICENSE)
+[![PowerShell Gallery](https://img.shields.io/badge/PowerShell-Gallery-blue.svg)](https://www.powershellgallery.com/)
+[![CI/CD](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
 
----
+**Author**: Security Team  
+**Version**: 1.1.0  
+**Target**: VMware vSphere 8.x
 
-## Overview
+## 🚀 Overview
 
-This project provides a PowerShell/PowerCLI script `vmware-vm-audit-dod-stig.ps1` that audits **Virtual Machine configuration settings** against common **DoD STIG / VMware vSphere 8 hardening recommendations**.
+A comprehensive PowerShell tool for auditing VMware virtual machine configurations against **Department of Defense Security Technical Implementation Guide (DoD STIG)** and **VMware vSphere 8 hardening recommendations**.
 
-- Read-only: it does **not** modify VM configuration.  
-- Produces a **full table** directly in the PowerShell console.  
-- Checks include console data movement restrictions, VNC access, removable devices, firmware/Secure Boot/vTPM, and encryption posture.  
+### ✨ Key Features
 
----
+- 🔍 **Comprehensive Security Auditing** - 20+ security controls checked
+- 📊 **Detailed Compliance Reporting** - Clear pass/fail status with remediation guidance
+- 🛡️ **Read-Only Operation** - No modifications to your environment
+- ⚡ **Batch Processing** - Audit single VMs or entire vCenter inventories
+- 🔄 **CI/CD Integration** - Automated compliance monitoring
+- 📈 **Multiple Output Formats** - Console, CSV, JSON, HTML reports
+- 🌐 **Cross-Platform** - Windows, Linux, macOS support
 
-## License for This Repository
-This repository’s own content (README, file list, structure) is licensed under the MIT License. See LICENSE for details.
+### 🎯 Security Controls Audited
 
----
+| Category | Controls |
+|----------|----------|
+| **Console Security** | Copy/Paste restrictions, Drag & Drop controls, GUI options |
+| **Remote Access** | VNC access, console connections, remote display settings |
+| **Device Security** | Removable devices, serial/parallel ports, floppy drives |
+| **Firmware Security** | EFI Secure Boot, vTPM configuration, firmware type |
+| **Encryption** | VM encryption, disk encryption, key management |
+| **Advanced Settings** | VMware-specific security configurations |
 
-Disclaimer
+## 📋 Requirements
+
+- **PowerShell**: 5.1+ or PowerShell 7+ (recommended)
+- **VMware PowerCLI**: 13.0 or higher
+- **vCenter Access**: Read permissions on target VMs
+- **Network**: Connectivity to vCenter Server (port 443)
+
+## 🚀 Quick Start
+
+### 1. Install PowerCLI
+```powershell
+Install-Module -Name VMware.PowerCLI -Scope CurrentUser
+```
+
+### 2. Download and Run
+```powershell
+# Clone repository
+git clone https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig.git
+cd vmware-vm-audit-dod-stig
+
+# Run audit
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.example.com"
+```
+
+### 3. View Results
+```
+VMName      PowerState  Firmware  SecureBoot  vTPM  VMEncrypted  NonCompliantReasons
+----------  ----------  --------  ----------  ----  -----------  -------------------
+web-srv-01  PoweredOn   efi       True        True  True         
+db-srv-02   PoweredOn   efi       True        False True         vTPM not present
+test-vm     PoweredOff  bios      False       False False        Not EFI firmware; vTPM not present; VM not encrypted
+```
+
+## 📖 Documentation
+
+### 📚 User Guides
+- [📥 Installation Guide](docs/INSTALLATION.md) - Complete setup instructions
+- [⚡ Quick Start Tutorial](wiki/Quick-Start-Tutorial.md) - Get running in 5 minutes
+- [🔧 API Reference](docs/API.md) - Function and parameter documentation
+- [💡 Usage Examples](examples/) - Basic and advanced usage scenarios
+
+### 🏗️ Advanced Topics
+- [🏢 Enterprise Deployment](wiki/Advanced-Scenarios.md) - Large-scale implementations
+- [🔄 CI/CD Integration](wiki/Advanced-Scenarios.md#cicd-integration) - Automated compliance monitoring
+- [📊 Custom Reporting](examples/advanced-usage.ps1) - Report customization and automation
+- [🛠️ Troubleshooting](wiki/Troubleshooting.md) - Common issues and solutions
+
+## 🎯 Usage Examples
+
+### Basic Usage
+```powershell
+# Audit all VMs
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com"
+
+# Audit specific VM
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com" -VMName "web-server-01"
+
+# Include templates and powered-off VMs
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com" -IncludeTemplates -IncludePoweredOff
+```
+
+### Advanced Usage
+```powershell
+# Export to CSV
+$results = .\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com"
+$results | Export-Csv -Path "compliance-report.csv" -NoTypeInformation
+
+# Filter non-compliant VMs
+$results | Where-Object { $_.NonCompliantReasons -ne "" } | Format-Table
+
+# Generate compliance summary
+$compliant = ($results | Where-Object { $_.NonCompliantReasons -eq "" }).Count
+$total = $results.Count
+Write-Host "Compliance Rate: $([math]::Round(($compliant/$total)*100,2))%"
+```
+
+## 🏗️ Project Structure
+
+```
+vmware-vm-audit-dod-stig/
+├── 📁 .github/              # GitHub workflows and templates
+│   ├── workflows/           # CI/CD pipelines
+│   └── ISSUE_TEMPLATE/      # Issue templates
+├── 📁 docs/                 # Documentation
+├── 📁 examples/             # Usage examples
+├── 📁 tests/                # Test suites
+│   ├── unit/               # Unit tests
+│   └── integration/        # Integration tests
+├── 📁 wiki/                 # Wiki documentation
+├── 📄 vmware-vm-audit-dod-stig.ps1  # Main script
+├── 📄 README.md             # This file
+├── 📄 CHANGELOG.md          # Version history
+├── 📄 CONTRIBUTING.md       # Contribution guidelines
+├── 📄 SECURITY.md           # Security policy
+└── 📄 LICENSE               # MIT License
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Ways to Contribute
+- 🐛 Report bugs and issues
+- 💡 Suggest new features
+- 📝 Improve documentation
+- 🧪 Add tests and examples
+- 🔧 Submit bug fixes and enhancements
+
+## 📊 Compliance Standards
+
+This tool helps ensure compliance with:
+- **DoD STIG** - Department of Defense Security Technical Implementation Guide
+- **VMware vSphere 8** - VMware security hardening guidelines
+- **NIST Cybersecurity Framework** - Industry standard security controls
+- **CIS Controls** - Center for Internet Security benchmarks
+
+## 🔒 Security
+
+Security is our top priority. Please see our [Security Policy](SECURITY.md) for:
+- Vulnerability reporting process
+- Security best practices
+- Supported versions
+- Contact information
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⚠️ Disclaimer
 
 This script is provided "as is", without any warranty of any kind. Use it at your own risk. You are solely responsible for reviewing, testing, and implementing it in your own environment.
 
----
+## 🙏 Acknowledgments
 
-## Requirements
-
-- PowerShell 7+ (or Windows PowerShell 5.1)  
-- [VMware.PowerCLI](https://developer.vmware.com/powercli) 13 or higher  
-
-Install PowerCLI if not already installed:
-
-```powershell
-Install-Module -Name VMware.PowerCLI -Scope CurrentUser
+- VMware for PowerCLI and vSphere APIs
+- DoD for STIG security guidelines
+- Community contributors and testers
+- Security researchers and feedback providers
 
 ---
 
-Usage
-Clone or download this repository, then run the script:
-.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.lab.local" -VMName "test-vm"
+**⭐ Star this repository if you find it useful!**
 
----
-
-Parameters
-* - vCenter (mandatory): vCenter Server FQDN or IP.
-* - VMName (optional): audit only one VM; if omitted, all VMs are checked.
-* - IncludeTemplates: include VM templates in the audit.
-* - IncludePoweredOff: include powered-off VMs (default: on).
-
----
-
-VMName   PowerState OS                           Firmware SecureBoot vTPM VMEncrypted CopyDisabled PasteDisabled DnDDisabled VNCEnabled SerialPort ParallelPort Floppy CDConnectedNow CDConnectOnBoot NonCompliantReasons
-------   ---------- --                           -------- --------- ---- ----------- ------------ ------------- ----------- ---------- ---------- ------------ ------ -------------- --------------- -------------------
-test-vm  PoweredOn  Microsoft Windows Server...  efi      True      True True        True         True           True        False      False      False        False  False          VNC enabled; vTPM not present
+**🔗 [Documentation](wiki/Home.md) | [Examples](examples/) | [Issues](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues) | [Discussions](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/discussions)**

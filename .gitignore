@@ -1,0 +1,74 @@
+# PowerShell
+*.ps1xml
+*.psd1
+*.psm1
+*.dll
+*.exe
+
+# Test Results
+tests/results/
+TestResults.xml
+Coverage.xml
+*.trx
+
+# Reports and Logs
+reports/
+logs/
+*.log
+*.csv
+*.json
+*.html
+audit-*.csv
+compliance-*.json
+
+# Temporary Files
+*.tmp
+*.temp
+~$*
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Credentials and Secrets
+*.credentials
+*.key
+*.pem
+config.json
+secrets.json
+
+# History and Cache
+history/
+cache/
+.cache/
+
+# Node modules (if any)
+node_modules/
+
+# Python (if any)
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+build/
+dist/
+out/
+
+# Package files
+*.nupkg
+*.zip
+*.tar.gz
+
+# Local configuration
+local.config
+.env
+.env.local

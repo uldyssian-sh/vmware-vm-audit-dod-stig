@@ -1,0 +1,75 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        powershell-version: ['5.1', '7.x']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup PowerShell ${{ matrix.powershell-version }}
+      uses: actions/setup-powershell@v1
+      if: matrix.powershell-version == '7.x'
+    
+    - name: Install PowerCLI
+      shell: pwsh
+      run: |
+        Install-Module -Name VMware.PowerCLI -Force -Scope CurrentUser
+        Import-Module VMware.PowerCLI
+    
+    - name: Run Unit Tests
+      shell: pwsh
+      run: |
+        ./tests/Run-Tests.ps1 -TestType Unit
+    
+    - name: Run Integration Tests
+      shell: pwsh
+      run: |
+        ./tests/Run-Tests.ps1 -TestType Integration
+      continue-on-error: true
+    
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ matrix.powershell-version }}
+        path: tests/results/
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Security Scan
+      uses: github/super-linter@v5
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_POWERSHELL: true
+
+  release:
+    needs: [test, security-scan]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        draft: false
+        prerelease: false
