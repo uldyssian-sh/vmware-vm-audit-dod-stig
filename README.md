@@ -201,7 +201,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⚠️ Disclaimer
 
-This script is provided "as is", without any warranty of any kind. Use it at your own risk. You are solely responsible for reviewing, testing, and implementing it in your own environment.
+This script is provided "as is", without any warranty of any kind.
+Use it at your own risk.
+You are solely responsible for reviewing, testing, and implementing it in your own environment.
 
 ## 🙏 Acknowledgments
 
