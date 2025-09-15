@@ -7,7 +7,14 @@
 
 ## 🎯 Overview
 
-Enterprise-grade vmware vm audit dod stig solution with professional automation, security, and scalability features.
+Professional vmware vm audit dod stig solution with enterprise-grade automation and security features.
+
+## 📊 Repository Stats
+
+- **Files:**       39
+- **Technologies:** PowerShell YAML
+- **Type:** Infrastructure Automation
+- **Status:** Production Ready
 
 ## ✨ Features
 
@@ -23,11 +30,26 @@ Enterprise-grade vmware vm audit dod stig solution with professional automation,
 ## 🚀 Quick Start
 
 ```bash
+# Clone repository
 git clone https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig.git
 cd vmware-vm-audit-dod-stig
+
+# Setup environment
 chmod +x setup.sh
 ./setup.sh
 ```
+
+
+## ⚡ PowerShell Scripts
+
+```powershell
+# Set execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Run main script
+.\main.ps1
+```
+
 
 ## 📚 Documentation
 
@@ -47,8 +69,8 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
 ## 🆘 Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/REPO_NAME/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/REPO_NAME/wiki)
 
 ---
 
