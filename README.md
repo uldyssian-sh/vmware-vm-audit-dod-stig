@@ -1,5 +1,22 @@
 # VMware VM DoD STIG Audit Tool
 
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
+## Prerequisites
+
+Before using this project, ensure you have:
+- Required tools and dependencies
+- Proper access credentials
+- System requirements met
+
+
 [![GitHub release](https://img.shields.io/github/release/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/releases)
 [![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
 [![GitHub license](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/blob/main/LICENSE)
@@ -217,3 +234,21 @@ You are solely responsible for reviewing, testing, and implementing it in your o
 **⭐ Star this repository if you find it useful!**
 
 **🔗 [Documentation](wiki/Home.md) | [Examples](examples/) | [Issues](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues) | [Discussions](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/discussions)**
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
+- How to submit issues
+- How to propose changes
+- Code style guidelines
+- Review process
+
+## Support
+
+- 📖 [Wiki Documentation](../../wiki)
+- 💬 [Discussions](../../discussions)
+- 🐛 [Issue Tracker](../../issues)
+- 🔒 [Security Policy](SECURITY.md)
+
+---
+**Made with ❤️ for the community**
