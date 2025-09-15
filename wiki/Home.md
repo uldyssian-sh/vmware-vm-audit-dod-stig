@@ -57,7 +57,7 @@ This tool helps ensure compliance with:
 ```
 VMName      PowerState  OS                    Firmware  SecureBoot  vTPM  VMEncrypted  NonCompliantReasons
 ----------  ----------  --------------------  --------  ----------  ----  -----------  -------------------
-web-srv-01  PoweredOn   Windows Server 2022   efi       True        True  True         
+web-srv-01  PoweredOn   Windows Server 2022   efi       True        True  True
 db-srv-02   PoweredOn   RHEL 8.5             efi       True        False True         vTPM not present
 test-vm     PoweredOff  Windows 10           bios      False       False False        Not EFI firmware; vTPM not present; VM not encrypted
 ```

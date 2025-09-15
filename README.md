@@ -6,8 +6,8 @@
 [![PowerShell Gallery](https://img.shields.io/badge/PowerShell-Gallery-blue.svg)](https://www.powershellgallery.com/)
 [![CI/CD](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
 
-**Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)  
-**Version**: 1.1.0  
+**Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)
+**Version**: 1.1.0
 **Target**: VMware vSphere 8.x
 
 ## 🚀 Overview
@@ -99,7 +99,7 @@ cd vmware-vm-audit-dod-stig
 ```
 VMName      PowerState  Firmware  SecureBoot  vTPM  VMEncrypted  NonCompliantReasons
 ----------  ----------  --------  ----------  ----  -----------  -------------------
-web-srv-01  PoweredOn   efi       True        True  True         
+web-srv-01  PoweredOn   efi       True        True  True
 db-srv-02   PoweredOn   efi       True        False True         vTPM not present
 test-vm     PoweredOff  bios      False       False False        Not EFI firmware; vTPM not present; VM not encrypted
 ```

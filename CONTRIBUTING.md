@@ -84,11 +84,11 @@ function Get-AdvValue {
     param(
         [Parameter(Mandatory = $true)]
         [VMware.VimAutomation.ViCore.Types.V1.Inventory.VirtualMachine]$VM,
-        
+
         [Parameter(Mandatory = $true)]
         [string]$Name
     )
-    
+
     try {
         $setting = $VM | Get-AdvancedSetting -Name $Name -ErrorAction Stop
         return $setting.Value
@@ -125,12 +125,12 @@ Describe "Get-AdvValue" {
         # Setup mocks
         Mock Get-AdvancedSetting { return [PSCustomObject]@{ Value = "true" } }
     }
-    
+
     It "Should return setting value when found" {
         $result = Get-AdvValue -VM $mockVM -Name "test.setting"
         $result | Should -Be "true"
     }
-    
+
     It "Should return null when setting not found" {
         Mock Get-AdvancedSetting { throw "Not found" }
         $result = Get-AdvValue -VM $mockVM -Name "missing.setting"

@@ -77,7 +77,7 @@ The tool displays a table with compliance information:
 ```
 VMName      PowerState  Firmware  SecureBoot  vTPM  VMEncrypted  NonCompliantReasons
 ----------  ----------  --------  ----------  ----  -----------  -------------------
-web-srv-01  PoweredOn   efi       True        True  True         
+web-srv-01  PoweredOn   efi       True        True  True
 test-vm     PoweredOn   bios      False       False False        Not EFI firmware; vTPM not present; VM not encrypted
 ```
 
@@ -101,7 +101,7 @@ $results | ConvertTo-Json | Out-File "audit-results.json"
 ### 1. Daily Compliance Check
 ```powershell
 # Quick check of critical VMs
-.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com" | 
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcenter.company.com" |
     Where-Object { $_.NonCompliantReasons -ne "" } |
     Format-Table VMName, NonCompliantReasons
 ```
@@ -119,7 +119,7 @@ Write-Host "Compliance Rate: $rate% ($compliant/$total VMs compliant)"
 ### 3. Focus on Specific Issues
 ```powershell
 # Find VMs without encryption
-$results | Where-Object { -not $_.VMEncrypted } | 
+$results | Where-Object { -not $_.VMEncrypted } |
     Select-Object VMName, PowerState, OS
 
 # Find VMs with VNC enabled
