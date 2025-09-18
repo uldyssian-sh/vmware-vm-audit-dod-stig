@@ -46,7 +46,7 @@ jobs:
         $results = Invoke-ScriptAnalyzer -Path ./vmware-vm-audit-dod-stig.ps1
         if ($results) {
           $results | Format-Table
-          Write-Host "⚠️ PSScriptAnalyzer found issues"
+          Write-Host "⚠️ PSScriptAnalyzer found issues (non-blocking)"
         } else {
           Write-Host "✅ No PSScriptAnalyzer issues found"
         }

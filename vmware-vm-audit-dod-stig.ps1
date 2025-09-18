@@ -53,13 +53,32 @@ param(
 # --- Helper functions -----------------------------------------------------
 
 function Get-AdvValue {
-  param($VM, [string]$Name)
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    $VM,
+    [Parameter(Mandatory = $true)]
+    [string]$Name
+  )
   try { ($VM | Get-AdvancedSetting -Name $Name -ErrorAction Stop).Value } catch { $null }
 }
 
-function Is-AdvTrue    { param($VM, $Name) $v = Get-AdvValue -VM $VM -Name $Name; if ($null -eq $v) { $false } else { [bool]$v } }
-function Is-AdvFalseOrMissing {
-  param($VM, $Name)
+function Test-AdvTrue {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]$VM,
+    [Parameter(Mandatory = $true)][string]$Name
+  )
+  $v = Get-AdvValue -VM $VM -Name $Name
+  if ($null -eq $v) { $false } else { [bool]$v }
+}
+
+function Test-AdvFalseOrMissing {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]$VM,
+    [Parameter(Mandatory = $true)][string]$Name
+  )
   $v = Get-AdvValue -VM $VM -Name $Name
   if ($null -eq $v) { return $true } else { return -not ([bool]$v) }
 }
@@ -118,14 +137,14 @@ $results = foreach ($vm in $vms) {
   $cfg = $vm.ExtensionData.Config
 
   # Advanced settings (console data movement / tools / VNC)
-  $copyDisabled    = Is-AdvTrue         $vm 'isolation.tools.copy.disable'
-  $pasteDisabled   = Is-AdvTrue         $vm 'isolation.tools.paste.disable'
-  $dndDisabled     = Is-AdvTrue         $vm 'isolation.tools.dnd.disable'
-  $guiOptsDisabled = Is-AdvFalseOrMissing $vm 'isolation.tools.setGUIOptions.enable'
-  $diskShrinkDis   = Is-AdvTrue         $vm 'isolation.tools.diskShrink.disable'
-  $diskWiperDis    = Is-AdvTrue         $vm 'isolation.tools.diskWiper.disable'
-  $devConnectDis   = Is-AdvTrue         $vm 'isolation.device.connectable.disable'
-  $vncEnabled      = Is-AdvTrue         $vm 'RemoteDisplay.vnc.enabled'
+  $copyDisabled    = Test-AdvTrue         $vm 'isolation.tools.copy.disable'
+  $pasteDisabled   = Test-AdvTrue         $vm 'isolation.tools.paste.disable'
+  $dndDisabled     = Test-AdvTrue         $vm 'isolation.tools.dnd.disable'
+  $guiOptsDisabled = Test-AdvFalseOrMissing $vm 'isolation.tools.setGUIOptions.enable'
+  $diskShrinkDis   = Test-AdvTrue         $vm 'isolation.tools.diskShrink.disable'
+  $diskWiperDis    = Test-AdvTrue         $vm 'isolation.tools.diskWiper.disable'
+  $devConnectDis   = Test-AdvTrue         $vm 'isolation.device.connectable.disable'
+  $vncEnabled      = Test-AdvTrue         $vm 'RemoteDisplay.vnc.enabled'
 
   # Firmware / Secure Boot / vTPM
   $firmware   = $cfg.Firmware
