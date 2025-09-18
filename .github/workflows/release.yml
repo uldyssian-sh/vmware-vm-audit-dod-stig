@@ -21,7 +21,12 @@ jobs:
         fetch-depth: 0
 
     - name: Setup PowerShell
-      uses: actions/setup-powershell@v1
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          sudo apt-get update
+          sudo apt-get install -y powershell
+        fi
 
     - name: Generate Changelog
       id: changelog
