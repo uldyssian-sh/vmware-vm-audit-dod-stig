@@ -1,4 +1,4 @@
-name: PowerShell Tests
+name: Syntax Check
 
 on:
   push:
