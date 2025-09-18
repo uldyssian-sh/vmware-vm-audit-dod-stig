@@ -6,6 +6,7 @@
 [![CI](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
 [![PowerShell Gallery](https://img.shields.io/badge/PowerShell-Gallery-blue.svg)](https://www.powershellgallery.com/)
 [![VMware Compatibility](https://img.shields.io/badge/VMware-vSphere%208.0-green.svg)](https://www.vmware.com/products/vsphere.html)
+[![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
 
 ## 📋 Overview
 
@@ -182,4 +183,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made with ❤️ by [uldyssian-sh](https://github.com/uldyssian-sh)**
-<!-- Deployment trigger Wed Sep 17 22:40:58 CEST 2025 -->
