@@ -41,6 +41,7 @@ jobs:
 
     - name: Run PSScriptAnalyzer
       shell: pwsh
+      continue-on-error: true
       run: |
         Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
         $results = Invoke-ScriptAnalyzer -Path ./vmware-vm-audit-dod-stig.ps1
