@@ -22,7 +22,9 @@ updates:
       prefix: "chore"
       include: "scope"
     ignore:
-      - dependency-name: "*"
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "prettier"
         update-types: ["version-update:semver-major"]
     
   - package-ecosystem: "pip"
@@ -36,7 +38,9 @@ updates:
       prefix: "chore"
       include: "scope"
     ignore:
-      - dependency-name: "*"
+      - dependency-name: "requests"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "pyyaml"
         update-types: ["version-update:semver-major"]
     
   - package-ecosystem: "docker"

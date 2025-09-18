@@ -1,17 +1,19 @@
-# vmware-vm-audit-dod-stig
+# VMware VM DoD STIG Audit Tool
 
 [![GitHub license](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
 [![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/network)
 [![CI](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
+[![PowerShell Gallery](https://img.shields.io/badge/PowerShell-Gallery-blue.svg)](https://www.powershellgallery.com/)
+[![VMware Compatibility](https://img.shields.io/badge/VMware-vSphere%208.0-green.svg)](https://www.vmware.com/products/vsphere.html)
 
 ## 📋 Overview
 
-Enterprise VMware infrastructure management and automation tools
+PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations against Department of Defense (DoD) Security Technical Implementation Guide (STIG) hardening recommendations. This read-only audit tool helps identify security compliance gaps without making any changes to your environment.
 
-**Repository Type:** VMware  
-**Technology Stack:** PowerCLI, vSphere API, PowerShell, Python
+**Repository Type:** Security Audit Tool  
+**Technology Stack:** PowerShell, VMware PowerCLI, vSphere API  
+**Compliance Framework:** DoD STIG
 
 ## ✨ Features
 
@@ -27,104 +29,99 @@ Enterprise VMware infrastructure management and automation tools
 
 ### Prerequisites
 
-- Python 3.8+ (for Python projects)
-- Docker (optional)
-- Git
+- **PowerShell 7+** (recommended) or Windows PowerShell 5.1
+- **VMware PowerCLI 13+**
+- **vSphere 8.0** environment access
+- **Network connectivity** to vCenter Server
 
 ### Installation
 
-```bash
+```powershell
 # Clone the repository
 git clone https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig.git
 cd vmware-vm-audit-dod-stig
 
-# Install dependencies
-pip install -r requirements.txt
+# Install VMware PowerCLI (if not already installed)
+Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force
 
-# Run the application
-python main.py
+# Run the audit script
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.lab.local"
 ```
 
-### Docker Deployment
+### Basic Usage Examples
 
-```bash
-# Build Docker image
-docker build -t vmware-vm-audit-dod-stig .
+```powershell
+# Audit all VMs in vCenter
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com"
 
-# Run container
-docker run -p 8080:8080 vmware-vm-audit-dod-stig
+# Audit specific VM
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -VMName "web-server-01"
+
+# Include VM templates in audit
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -IncludeTemplates
+
+# Exclude powered-off VMs
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -IncludePoweredOff:$false
 ```
 
 ## 📖 Documentation
 
-- [Installation Guide](docs/installation.md)
-- [Configuration](docs/configuration.md)
-- [API Reference](docs/api.md)
-- [Examples](examples/)
-- [Troubleshooting](docs/troubleshooting.md)
+- [Installation Guide](docs/INSTALLATION.md)
+- [API Reference](docs/API.md)
+- [Examples](examples/README.md)
+- [Wiki Home](wiki/Home.md)
+- [Quick Start Tutorial](wiki/Quick-Start-Tutorial.md)
 
-## 🔧 Configuration
+## 🔧 Script Parameters
 
-Configuration can be done through:
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `-vCenter` | String | Yes | vCenter Server FQDN or IP address |
+| `-VMName` | String | No | Specific VM name to audit (default: all VMs) |
+| `-IncludeTemplates` | Switch | No | Include VM templates in audit |
+| `-IncludePoweredOff` | Switch | No | Include powered-off VMs (default: true) |
 
-1. **Environment Variables**
-2. **Configuration Files**
-3. **Command Line Arguments**
+### DoD STIG Checks Performed
 
-Example configuration:
+- **Console Security**: Copy/paste, drag-and-drop restrictions
+- **Device Security**: Serial/parallel ports, floppy drives, CD/DVD
+- **Firmware Security**: EFI firmware, Secure Boot, vTPM
+- **Encryption**: VM home and disk encryption status
+- **Remote Access**: VNC configuration
+- **Tools Security**: VMware Tools restrictions
 
-```yaml
-# config.yml
-app:
-  name: vmware-vm-audit-dod-stig
-  version: "1.0.0"
-  debug: false
+## 📊 Sample Output
 
-logging:
-  level: INFO
-  format: json
+```
+VMName           PowerState  OS                    Firmware  SecureBoot  vTPM   VMEncrypted  NonCompliantReasons
+------           ----------  --                    --------  ----------  ----   -----------  -------------------
+web-server-01    PoweredOn   Microsoft Windows...  efi       True        True   True         
+db-server-02     PoweredOn   Ubuntu Linux (64-bit) bios      False       False  False        Not EFI firmware; vTPM not present; Copy not disabled
+test-vm-03       PoweredOff  CentOS 7 (64-bit)    efi       True        True   False        Serial port present; VNC enabled
 ```
 
-## 📊 Usage Examples
+### Compliance Status Interpretation
 
-### Basic Usage
-
-```python
-from vmware-vm-audit-dod-stig import main
-
-# Initialize application
-app = main.Application()
-
-# Run application
-app.run()
-```
-
-### Advanced Configuration
-
-```python
-# Advanced usage with custom configuration
-config = {
-    'debug': True,
-    'log_level': 'DEBUG'
-}
-
-app = main.Application(config=config)
-app.run()
-```
+- ✅ **Compliant**: No issues found in NonCompliantReasons column
+- ⚠️ **Partially Compliant**: Some security settings need attention
+- ❌ **Non-Compliant**: Multiple security issues require remediation
 
 ## 🧪 Testing
 
 Run the test suite:
 
-```bash
+```powershell
 # Run all tests
-pytest
+.\tests\Run-Tests.ps1
 
-# Run with coverage
-pytest --cov=vmware-vm-audit-dod-stig
+# Run unit tests only
+.\tests\Run-Tests.ps1 -TestType Unit
 
-# Run specific test file
-pytest tests/test_main.py
+# Run integration tests
+.\tests\Run-Tests.ps1 -TestType Integration
+
+# Run with verbose output
+.\tests\Run-Tests.ps1 -Verbose
 ```
 
 ## 🤝 Contributing
@@ -133,20 +130,18 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ### Development Setup
 
-```bash
+```powershell
 # Fork and clone the repository
 git clone https://github.com/YOUR_USERNAME/vmware-vm-audit-dod-stig.git
 cd vmware-vm-audit-dod-stig
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
 # Install development dependencies
-pip install -r requirements-dev.txt
+Install-Module -Name VMware.PowerCLI -Scope CurrentUser
+Install-Module -Name Pester -Scope CurrentUser -MinimumVersion 5.0
+Install-Module -Name PSScriptAnalyzer -Scope CurrentUser
 
-# Install pre-commit hooks
-pre-commit install
+# Run development setup script
+.\scripts\setup-dev.ps1
 ```
 
 ### Pull Request Process

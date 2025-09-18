@@ -1,0 +1,67 @@
+name: PowerShell Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  test:
+    name: PowerShell Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        powershell-version: ['7.4']
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup PowerShell
+      uses: actions/setup-powershell@v1
+      with:
+        powershell-version: ${{ matrix.powershell-version }}
+
+    - name: Install PowerCLI
+      shell: pwsh
+      run: |
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force
+        Install-Module -Name Pester -Scope CurrentUser -Force -MinimumVersion 5.0
+
+    - name: Run Pester Tests
+      shell: pwsh
+      run: |
+        Import-Module Pester
+        $config = New-PesterConfiguration
+        $config.Run.Path = './tests'
+        $config.TestResult.Enabled = $true
+        $config.TestResult.OutputFormat = 'JUnitXml'
+        $config.TestResult.OutputPath = './test-results.xml'
+        $config.CodeCoverage.Enabled = $true
+        $config.CodeCoverage.Path = './*.ps1'
+        $config.CodeCoverage.OutputFormat = 'JaCoCo'
+        $config.CodeCoverage.OutputPath = './coverage.xml'
+        Invoke-Pester -Configuration $config
+
+    - name: Publish Test Results
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: PowerShell Tests (${{ matrix.os }})
+        path: './test-results.xml'
+        reporter: java-junit
+
+    - name: Upload Coverage
+      uses: codecov/codecov-action@v4
+      if: matrix.os == 'ubuntu-latest'
+      with:
+        file: ./coverage.xml
+        flags: powershell
+        name: powershell-coverage
