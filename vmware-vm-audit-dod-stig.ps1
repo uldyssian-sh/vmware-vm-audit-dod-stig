@@ -123,7 +123,7 @@ if (-not (Get-Module -ListAvailable -Name VMware.PowerCLI)) {
 Import-Module VMware.PowerCLI -ErrorAction Stop | Out-Null
 Set-PowerCLIConfiguration -Scope Session -InvalidCertificateAction Ignore -Confirm:$false | Out-Null
 
-Write-Host "Connecting to $vCenter ..."
+Write-Output "Connecting to $vCenter ..."
 $null = Connect-VIServer -Server $vCenter
 
 # --- Collect VMs ----------------------------------------------------------

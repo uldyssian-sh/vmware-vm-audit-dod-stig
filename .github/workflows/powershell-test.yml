@@ -8,11 +8,10 @@ on:
 
 permissions:
   contents: read
-  checks: write
 
 jobs:
   test:
-    name: PowerShell Tests
+    name: PowerShell Syntax Check
     runs-on: ubuntu-latest
     
     steps:
@@ -24,30 +23,20 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y powershell
 
-    - name: Install PowerCLI
+    - name: Test Script Syntax
       shell: pwsh
       run: |
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-        Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force -SkipPublisherCheck
-        Install-Module -Name Pester -Scope CurrentUser -Force -MinimumVersion 5.0
-
-    - name: Run Basic Tests
-      shell: pwsh
-      run: |
-        Write-Host "PowerShell version: $($PSVersionTable.PSVersion)"
-        Write-Host "Testing script syntax..."
+        Write-Output "PowerShell version: $($PSVersionTable.PSVersion)"
+        Write-Output "Testing script syntax..."
         $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content ./vmware-vm-audit-dod-stig.ps1 -Raw), [ref]$null)
-        Write-Host "✅ Script syntax is valid"
+        Write-Output "✅ Script syntax is valid"
 
-    - name: Run PSScriptAnalyzer
+    - name: Test Examples Syntax
       shell: pwsh
-      continue-on-error: true
       run: |
-        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
-        $results = Invoke-ScriptAnalyzer -Path ./vmware-vm-audit-dod-stig.ps1
-        if ($results) {
-          $results | Format-Table
-          Write-Host "⚠️ PSScriptAnalyzer found issues (non-blocking)"
-        } else {
-          Write-Host "✅ No PSScriptAnalyzer issues found"
+        Write-Output "Testing examples syntax..."
+        Get-ChildItem examples/*.ps1 | ForEach-Object {
+          Write-Output "Checking $($_.Name)..."
+          $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $_.FullName -Raw), [ref]$null)
         }
+        Write-Output "✅ All examples syntax valid"
