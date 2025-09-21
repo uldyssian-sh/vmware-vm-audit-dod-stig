@@ -56,7 +56,7 @@ function Get-AdvValue {
   [CmdletBinding()]
   param(
     [Parameter(Mandatory = $true)]
-    $VM,
+    [PSObject]$VM,
     [Parameter(Mandatory = $true)]
     [string]$Name
   )
@@ -66,7 +66,7 @@ function Get-AdvValue {
 function Test-AdvTrue {
   [CmdletBinding()]
   param(
-    [Parameter(Mandatory = $true)]$VM,
+    [Parameter(Mandatory = $true)][PSObject]$VM,
     [Parameter(Mandatory = $true)][string]$Name
   )
   $v = Get-AdvValue -VM $VM -Name $Name
@@ -76,7 +76,7 @@ function Test-AdvTrue {
 function Test-AdvFalseOrMissing {
   [CmdletBinding()]
   param(
-    [Parameter(Mandatory = $true)]$VM,
+    [Parameter(Mandatory = $true)][PSObject]$VM,
     [Parameter(Mandatory = $true)][string]$Name
   )
   $v = Get-AdvValue -VM $VM -Name $Name
@@ -84,7 +84,8 @@ function Test-AdvFalseOrMissing {
 }
 
 function Get-DeviceFlags {
-  param($Device)
+  [CmdletBinding()]
+  param([PSObject]$Device)
   $now  = $false
   $onpo = $false
   try {
@@ -98,7 +99,8 @@ function Get-DeviceFlags {
 }
 
 function Get-EncState {
-  param($VM)
+  [CmdletBinding()]
+  param([PSObject]$VM)
   try {
     $cfg = $VM.ExtensionData.Config
     $vmHomeEncrypted = $null -ne $cfg.KeyId
