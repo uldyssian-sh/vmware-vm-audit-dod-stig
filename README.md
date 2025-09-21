@@ -18,14 +18,13 @@ PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations 
 
 ## ✨ Features
 
-- 🚀 **High Performance** - Optimized for enterprise environments with progress tracking
-- 🔒 **Security First** - Built with security best practices and read-only operations
-- 📊 **Progress Tracking** - Real-time progress bar with percentage and ETA
-- 📈 **Multiple Export Formats** - CSV and HTML reports with auto-open
-- 🎯 **Smart Filtering** - Automatically excludes vCLS VMs from audit
-- 💻 **Cross-Platform** - Works on Windows, Linux, and macOS
-- 📋 **Comprehensive Reporting** - Single-line display with auto-sized columns
-- ⚡ **PoweredOff VM Support** - OS detection for powered-off virtual machines
+- 🚀 **High Performance** - Optimized for enterprise environments
+- 🔒 **Security First** - Built with security best practices
+- 📊 **Monitoring** - Comprehensive logging and metrics
+- 🔧 **Automation** - Fully automated deployment and management
+- 📚 **Documentation** - Extensive documentation and examples
+- 🧪 **Testing** - Comprehensive test coverage
+- 🔄 **CI/CD** - Automated testing and deployment pipelines
 
 ## 🚀 Quick Start
 
@@ -44,8 +43,6 @@ PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations 
 - **VMware PowerCLI**: Version 13.0 or later
 - **Permissions**: Read-only access to vCenter (minimum required)
 
-
-
 ### Installation
 
 ```powershell
@@ -63,21 +60,17 @@ Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force
 ### Basic Usage Examples
 
 ```powershell
-# Download and run the enhanced script with progress tracking
-$url = "https://raw.githubusercontent.com/uldyssian-sh/vmware-vm-audit-dod-stig/main/vmware-vm-audit-dod-stig-progress.ps1"
-Invoke-WebRequest -Uri $url -OutFile "vmware-vm-audit-dod-stig-progress.ps1"
-
-# Audit all VMs in vCenter (excludes vCLS VMs automatically)
-.\vmware-vm-audit-dod-stig-progress.ps1 -vCenter "vcsa.example.com"
+# Audit all VMs in vCenter
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com"
 
 # Audit specific VM
-.\vmware-vm-audit-dod-stig-progress.ps1 -vCenter "vcsa.example.com" -VMName "web-server-01"
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -VMName "web-server-01"
 
 # Include VM templates in audit
-.\vmware-vm-audit-dod-stig-progress.ps1 -vCenter "vcsa.example.com" -IncludeTemplates
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -IncludeTemplates
 
 # Exclude powered-off VMs
-.\vmware-vm-audit-dod-stig-progress.ps1 -vCenter "vcsa.example.com" -IncludePoweredOff:$false
+.\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.example.com" -IncludePoweredOff:$false
 ```
 
 ## 📖 Documentation
@@ -105,37 +98,15 @@ Invoke-WebRequest -Uri $url -OutFile "vmware-vm-audit-dod-stig-progress.ps1"
 - **Encryption**: VM home and disk encryption status
 - **Remote Access**: VNC configuration
 - **Tools Security**: VMware Tools restrictions
-- **VM Filtering**: Automatically excludes vCLS (vSphere Clustering Service) VMs
-- **OS Detection**: Identifies operating systems for both powered-on and powered-off VMs
 
 ## 📊 Sample Output
 
-### Console Progress Display
-```
-📊 Collecting VM inventory...
-✅ Found 15 VMs to audit
-🔍 Starting DoD STIG compliance audit...
-[1/15] (6.7%) Auditing: web-server-01
-[2/15] (13.3%) Auditing: db-server-02
-[3/15] (20.0%) Auditing: app-server-01
-...
-✅ Audit completed in 02:15 (mm:ss)
-```
-
-### Results Table
 ```
 VMName           PowerState  OS                    Firmware  SecureBoot  vTPM   VMEncrypted  NonCompliantReasons
 ------           ----------  --                    --------  ----------  ----   -----------  -------------------
 web-server-01    PoweredOn   Microsoft Windows...  efi       True        True   True         
 db-server-02     PoweredOn   Ubuntu Linux (64-bit) bios      False       False  False        Not EFI firmware; vTPM not present; Copy not disabled
 test-vm-03       PoweredOff  CentOS 7 (64-bit)    efi       True        True   False        Serial port present; VNC enabled
-```
-
-### Generated Reports
-```
-✅ CSV report exported: VMware_DoD_STIG_Audit_20241221_143022.csv
-✅ HTML report generated: VMware_DoD_STIG_Audit_Report_20241221_143022.html
-🌐 HTML report opened in browser
 ```
 
 ### Compliance Status Interpretation
