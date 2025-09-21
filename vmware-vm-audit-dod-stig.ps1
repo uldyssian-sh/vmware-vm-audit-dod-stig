@@ -223,7 +223,73 @@ $results = foreach ($vm in $vms) {
   }
 }
 
-# --- Console output only ---------------------------------------------------
-# Print a full table with all columns. No CSV is produced.
-$results | Format-Table -Property VMName, PowerState, OS, Firmware, SecureBoot, vTPM, VMEncrypted, CopyDisabled, PasteDisabled, DnDDisabled, GUIOptsDisabled, DiskShrinkDis, DiskWiperDis, DevConnectDis, VNCEnabled, SerialPort, ParallelPort, Floppy, CDConnectedNow, CDConnectOnBoot, NonCompliantReasons -Wrap
+# --- Export results ---------------------------------------------------
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$csvPath = "VMware_DoD_STIG_Audit_$timestamp.csv"
+$htmlPath = "VMware_DoD_STIG_Audit_Report_$timestamp.html"
+
+# Export to CSV
+$results | Export-Csv -Path $csvPath -NoTypeInformation -Encoding UTF8
+Write-Output "✅ CSV report exported: $csvPath"
+
+# Generate HTML report
+$compliantCount = ($results | Where-Object {[string]::IsNullOrEmpty($_.NonCompliantReasons)}).Count
+$nonCompliantCount = ($results | Where-Object {-not [string]::IsNullOrEmpty($_.NonCompliantReasons)}).Count
+
+$htmlContent = @"
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VMware DoD STIG Audit Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        .compliant { background-color: #d5f4e6; }
+        .non-compliant { background-color: #ffeaa7; }
+        .summary { background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🔒 VMware DoD STIG Audit Report</h1>
+    <div class="summary">
+        <h3>📊 Summary</h3>
+        <p><strong>Report Generated:</strong> $(Get-Date)</p>
+        <p><strong>vCenter Server:</strong> $vCenter</p>
+        <p><strong>Total VMs Audited:</strong> $($results.Count)</p>
+        <p><strong>Compliant VMs:</strong> $compliantCount</p>
+        <p><strong>Non-Compliant VMs:</strong> $nonCompliantCount</p>
+    </div>
+    <table>
+        <tr>
+            <th>VM Name</th>
+            <th>Power State</th>
+            <th>OS</th>
+            <th>Firmware</th>
+            <th>Secure Boot</th>
+            <th>vTPM</th>
+            <th>VM Encrypted</th>
+            <th>Non-Compliant Reasons</th>
+        </tr>
+"@
+
+foreach ($vm in $results) {
+    $rowClass = if ([string]::IsNullOrEmpty($vm.NonCompliantReasons)) { "compliant" } else { "non-compliant" }
+    $htmlContent += "        <tr class=`"$rowClass`"><td>$($vm.VMName)</td><td>$($vm.PowerState)</td><td>$($vm.OS)</td><td>$($vm.Firmware)</td><td>$($vm.SecureBoot)</td><td>$($vm.vTPM)</td><td>$($vm.VMEncrypted)</td><td>$($vm.NonCompliantReasons)</td></tr>`r`n"
+}
+
+$htmlContent += "    </table></body></html>"
+
+# Save HTML report
+$htmlContent | Out-File -FilePath $htmlPath -Encoding UTF8
+Write-Output "✅ HTML report generated: $htmlPath"
+
+# Display console output
+$results | Format-Table -Property VMName, PowerState, OS, Firmware, SecureBoot, vTPM, VMEncrypted, NonCompliantReasons -Wrap
+
+# Open HTML report
+Start-Process $htmlPath
+Write-Output "🌐 HTML report opened in browser"
 
