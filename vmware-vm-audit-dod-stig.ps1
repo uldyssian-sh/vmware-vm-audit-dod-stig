@@ -225,5 +225,5 @@ $results = foreach ($vm in $vms) {
 
 # --- Console output only ---------------------------------------------------
 # Print a full table with all columns. No CSV is produced.
-$results | Format-Table -AutoSize
+$results | Format-Table -Property VMName, PowerState, OS, Firmware, SecureBoot, vTPM, VMEncrypted, CopyDisabled, PasteDisabled, DnDDisabled, GUIOptsDisabled, DiskShrinkDis, DiskWiperDis, DevConnectDis, VNCEnabled, SerialPort, ParallelPort, Floppy, CDConnectedNow, CDConnectOnBoot, NonCompliantReasons -Wrap
 
