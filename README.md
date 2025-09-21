@@ -43,12 +43,7 @@ PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations 
 - **VMware PowerCLI**: Version 13.0 or later
 - **Permissions**: Read-only access to vCenter (minimum required)
 
-### Expected Execution Times
-| Environment Size | VMs | Duration | Description |
-|------------------|-----|----------|-------------|
-| **Small Lab** | 5-20 | 2-5 minutes | Home lab or small test environment |
-| **Medium Enterprise** | 50-200 | 8-15 minutes | Typical enterprise environment |
-| **Large Enterprise** | 200+ | 20-45 minutes | Large datacenter with multiple clusters |
+
 
 ### Installation
 
