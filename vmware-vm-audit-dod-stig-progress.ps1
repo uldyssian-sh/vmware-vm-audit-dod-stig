@@ -307,9 +307,21 @@ $htmlContent = @"
         </tr>
 "@
 
-foreach ($vm in $results) {
+# Sort results by PowerState (PoweredOn first, then PoweredOff)
+$sortedResults = $results | Sort-Object @{Expression={if($_.PowerState -eq 'PoweredOn'){0}else{1}}}, VMName
+
+foreach ($vm in $sortedResults) {
     $rowClass = if ([string]::IsNullOrEmpty($vm.NonCompliantReasons)) { "compliant" } else { "non-compliant" }
-    $htmlContent += "        <tr class=`"$rowClass`"><td>$($vm.VMName)</td><td>$($vm.PowerState)</td><td>$($vm.OS)</td><td>$($vm.Firmware)</td><td>$($vm.SecureBoot)</td><td>$($vm.vTPM)</td><td>$($vm.VMEncrypted)</td><td>$($vm.NonCompliantReasons)</td></tr>`r`n"
+    $htmlContent += "        <tr class=`"$rowClass`">`r`n"
+    $htmlContent += "            <td>$($vm.VMName)</td>`r`n"
+    $htmlContent += "            <td>$($vm.PowerState)</td>`r`n"
+    $htmlContent += "            <td>$($vm.OS)</td>`r`n"
+    $htmlContent += "            <td>$($vm.Firmware)</td>`r`n"
+    $htmlContent += "            <td>$($vm.SecureBoot)</td>`r`n"
+    $htmlContent += "            <td>$($vm.vTPM)</td>`r`n"
+    $htmlContent += "            <td>$($vm.VMEncrypted)</td>`r`n"
+    $htmlContent += "            <td>$($vm.NonCompliantReasons)</td>`r`n"
+    $htmlContent += "        </tr>`r`n"
 }
 
 $htmlContent += "    </table></body></html>"
