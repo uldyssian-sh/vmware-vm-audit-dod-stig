@@ -28,12 +28,27 @@ PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations 
 
 ## 🚀 Quick Start
 
-### Prerequisites
+## 📝 Prerequisites
 
-- **PowerShell 7+** (recommended) or Windows PowerShell 5.1
-- **VMware PowerCLI 13+**
-- **vSphere 8.0** environment access
-- **Network connectivity** to vCenter Server
+### System Requirements
+- **Operating System**: Windows 10/11, Windows Server 2016+, or PowerShell Core on Linux/macOS
+- **PowerShell**: Version 5.1 or PowerShell Core 7.0+
+- **Memory**: Minimum 2GB RAM (4GB recommended for large environments)
+- **Disk Space**: 100MB free space for audit reports
+- **Network**: HTTPS access to vCenter Server (port 443)
+
+### VMware Environment
+- **vSphere Version**: 8.0 or later
+- **vCenter Server**: 8.0 or later
+- **VMware PowerCLI**: Version 13.0 or later
+- **Permissions**: Read-only access to vCenter (minimum required)
+
+### Expected Execution Times
+| Environment Size | VMs | Duration | Description |
+|------------------|-----|----------|-------------|
+| **Small Lab** | 5-20 | 2-5 minutes | Home lab or small test environment |
+| **Medium Enterprise** | 50-200 | 8-15 minutes | Typical enterprise environment |
+| **Large Enterprise** | 200+ | 20-45 minutes | Large datacenter with multiple clusters |
 
 ### Installation
 
