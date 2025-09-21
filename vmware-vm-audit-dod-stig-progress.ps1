@@ -279,7 +279,7 @@ $htmlContent = @"
         h1 { color: #2c3e50; }
         table { border-collapse: collapse; width: 100%; margin-top: 20px; table-layout: auto; }
         th, td { border: 1px solid #ddd; padding: 4px; text-align: left; font-size: 12px; white-space: nowrap; }
-        th:nth-child(8), td:nth-child(8) { white-space: normal; max-width: 300px; } /* Non-Compliant Reasons */
+        th:nth-child(8), td:nth-child(8) { white-space: nowrap; min-width: 300px; } /* Non-Compliant Reasons */
         th { background-color: #3498db; color: white; }
         .compliant { background-color: #d5f4e6; }
         .non-compliant { background-color: #ffeaa7; }
