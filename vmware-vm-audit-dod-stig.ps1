@@ -137,6 +137,13 @@ if (-not $IncludePoweredOff) { $vms = $vms | Where-Object { $_.PowerState -eq 'P
 # --- Audit loop -----------------------------------------------------------
 $results = foreach ($vm in $vms) {
   $cfg = $vm.ExtensionData.Config
+  
+  # Get OS info - for PoweredOff VMs use config, for PoweredOn use guest info
+  $osInfo = if ($vm.PowerState -eq 'PoweredOff') {
+    $cfg.GuestFullName
+  } else {
+    if ([string]::IsNullOrEmpty($vm.Guest.OSFullName)) { $cfg.GuestFullName } else { $vm.Guest.OSFullName }
+  }
 
   # Advanced settings (console data movement / tools / VNC)
   $copyDisabled    = Test-AdvTrue         $vm 'isolation.tools.copy.disable'
@@ -201,7 +208,7 @@ $results = foreach ($vm in $vms) {
   [PSCustomObject]@{
     VMName           = $vm.Name
     PowerState       = $vm.PowerState
-    OS               = $vm.Guest.OSFullName
+    OS               = $osInfo
     Firmware         = $firmware
     SecureBoot       = $secureBoot
     vTPM             = [bool]$hasTPM
