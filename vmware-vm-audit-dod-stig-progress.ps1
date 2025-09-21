@@ -135,6 +135,8 @@ $vms = if ($VMName) { Get-VM -Name $VMName -ErrorAction Stop } else { Get-VM }
 
 if (-not $IncludeTemplates)  { $vms = $vms | Where-Object { -not $_.ExtensionData.Config.Template } }
 if (-not $IncludePoweredOff) { $vms = $vms | Where-Object { $_.PowerState -eq 'PoweredOn' } }
+# Filter out vCLS VMs
+$vms = $vms | Where-Object { -not $_.Name.StartsWith('vCLS') }
 
 Write-Output "✅ Found $($vms.Count) VMs to audit"
 Write-Output "🔍 Starting DoD STIG compliance audit..."
@@ -275,16 +277,9 @@ $htmlContent = @"
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { color: #2c3e50; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; table-layout: fixed; }
-        th, td { border: 1px solid #ddd; padding: 4px; text-align: left; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        th:nth-child(1), td:nth-child(1) { width: 12%; } /* VM Name */
-        th:nth-child(2), td:nth-child(2) { width: 8%; }  /* Power State */
-        th:nth-child(3), td:nth-child(3) { width: 15%; } /* OS */
-        th:nth-child(4), td:nth-child(4) { width: 8%; }  /* Firmware */
-        th:nth-child(5), td:nth-child(5) { width: 8%; }  /* Secure Boot */
-        th:nth-child(6), td:nth-child(6) { width: 6%; }  /* vTPM */
-        th:nth-child(7), td:nth-child(7) { width: 8%; }  /* VM Encrypted */
-        th:nth-child(8), td:nth-child(8) { width: 35%; white-space: normal; } /* Non-Compliant Reasons */
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; table-layout: auto; }
+        th, td { border: 1px solid #ddd; padding: 4px; text-align: left; font-size: 12px; white-space: nowrap; }
+        th:nth-child(8), td:nth-child(8) { white-space: normal; max-width: 300px; } /* Non-Compliant Reasons */
         th { background-color: #3498db; color: white; }
         .compliant { background-color: #d5f4e6; }
         .non-compliant { background-color: #ffeaa7; }
@@ -338,24 +333,8 @@ Write-Output "   ⚠️  Non-Compliant: $nonCompliantCount"
 Write-Output "   ⏱️  Total Time: $($totalTime.ToString('mm\:ss'))"
 Write-Output ""
 
-# Display console output with fixed column widths
-$results | Sort-Object @{Expression={if($_.PowerState -eq 'PoweredOn'){0}else{1}}}, VMName | Format-Table -Property @{
-    Name='VMName'; Expression={$_.VMName}; Width=15
-}, @{
-    Name='PowerState'; Expression={$_.PowerState}; Width=10
-}, @{
-    Name='OS'; Expression={$_.OS}; Width=20
-}, @{
-    Name='Firmware'; Expression={$_.Firmware}; Width=8
-}, @{
-    Name='SecureBoot'; Expression={$_.SecureBoot}; Width=10
-}, @{
-    Name='vTPM'; Expression={$_.vTPM}; Width=6
-}, @{
-    Name='VMEncrypted'; Expression={$_.VMEncrypted}; Width=11
-}, @{
-    Name='NonCompliantReasons'; Expression={$_.NonCompliantReasons}; Width=50
-}
+# Display console output with auto-sized columns
+$results | Sort-Object @{Expression={if($_.PowerState -eq 'PoweredOn'){0}else{1}}}, VMName | Format-Table -Property VMName, PowerState, OS, Firmware, SecureBoot, vTPM, VMEncrypted, NonCompliantReasons -AutoSize
 
 # Open HTML report
 Start-Process $htmlPath
