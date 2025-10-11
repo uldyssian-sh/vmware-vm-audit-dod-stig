@@ -1,85 +1,31 @@
 # Contributors
 
-## Project Maintainers
+This project exists thanks to all the people who contribute.
 
-### Core Team
+## Core Team
+
+### Maintainers
 - **uldyssian-sh LT** ([@uldyssian-sh](https://github.com/uldyssian-sh))
   - Email: 25517637+uldyssian-sh@users.noreply.github.com
-  - Role: Project Lead & Primary Developer
-  - Contributions: Initial development, architecture, security implementation
+  - Role: Project Lead & Maintainer
 
 ## Automated Contributors
 
 ### Bots & Automation
 - **dependabot[bot]** ([@dependabot](https://github.com/dependabot))
   - Role: Dependency Management
-  - Contributions: Automated dependency updates, security patches
+
+- **github-actions[bot]** (GitHub Actions)
+  - Role: CI/CD Automation
 
 - **actions-user** (GitHub Actions)
-  - Role: CI/CD Automation
-  - Contributions: Automated testing, releases, deployments
-
-## Community Contributors
-
-*We welcome community contributions! Contributors will be listed here as they make their first contributions.*
-
-### How to Become a Contributor
-
-1. **Fork** the repository
-2. **Create** a feature branch
-3. **Make** your changes
-4. **Submit** a pull request
-5. **Get listed** here after your first merged PR!
-
-## Contribution Types
-
-### Code Contributors
-- Bug fixes
-- Feature implementations
-- Performance improvements
-- Security enhancements
-
-### Documentation Contributors
-- README improvements
-- Wiki updates
-- Example additions
-- Translation efforts
-
-### Testing Contributors
-- Test case additions
-- Bug reports
-- Integration testing
-- Performance testing
-
-### Community Contributors
-- Issue triage
-- Discussion participation
-- User support
-- Feature suggestions
-
-## Recognition
-
-Contributors are recognized through:
-- **GitHub profile** contributions graph
-- **Release notes** mentions
-- **Contributors list** (this file)
-- **Special thanks** in major releases
-
-## Contributor Guidelines
-
-Please see our [Contributing Guide](CONTRIBUTING.md) for:
-- Code style guidelines
-- Testing requirements
-- Pull request process
-- Development setup
+  - Role: Repository Automation
 
 ## Contact
 
-For contributor-related questions:
-- 📧 [Email](mailto:25517637+uldyssian-sh@users.noreply.github.com)
-- 💬 [GitHub Discussions](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/discussions)
-- 🐛 [Issues](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
+- **GitHub Issues**: [Create an issue](../../issues/new)
+- **Email**: 25517637+uldyssian-sh@users.noreply.github.com
 
 ---
 
-*Thank you to all contributors who help make this project better! 🙏*
+**Thank you to all our contributors!** 🙏
