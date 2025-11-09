@@ -22,4 +22,4 @@ foreach ($dir in $dirs) {
 }
 
 Write-Host "✅ Development environment setup complete!" -ForegroundColor Green
-Write-Host "🔧 Run tests with: .\tests\Run-Tests.ps1" -ForegroundColor Cyan
+Write-Host "🔧 Run tests with: .\tests\Run-Tests.ps1" -ForegroundColor Cyan# Updated Sun Nov  9 12:52:36 CET 2025

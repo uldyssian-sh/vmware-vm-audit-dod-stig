@@ -62,3 +62,4 @@ NonCompliantReasons : Not EFI firmware; vTPM not present; Copy not disabled; Ser
 2. Copy example files to your environment
 3. Modify vCenter server names in examples
 4. Run examples with appropriate credentials# Updated Sun Nov  9 12:49:29 CET 2025
+# Updated Sun Nov  9 12:52:36 CET 2025

@@ -227,3 +227,4 @@ $results = foreach ($vm in $vms) {
 # Print a full table with all columns. No CSV is produced.
 $results | Format-Table -AutoSize
 
+# Updated Sun Nov  9 12:52:36 CET 2025

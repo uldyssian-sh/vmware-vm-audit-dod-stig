@@ -114,3 +114,4 @@ Special thanks to all contributors who helped make these releases possible:
 ---
 
 For more detailed information about each release, visit the [GitHub Releases](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/releases) page.# Updated Sun Nov  9 12:49:29 CET 2025
+# Updated Sun Nov  9 12:52:36 CET 2025
