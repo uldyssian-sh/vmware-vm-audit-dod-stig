@@ -84,4 +84,3 @@ Connect-VIServer -Server your-vcenter.domain.com
 ## Next Steps
 - Review the [Quick Start Guide](../wiki/Quick-Start-Tutorial.md)
 - Check [Configuration Examples](../examples/)
-- Read [Best Practices](../docs/BEST_PRACTICES.md)# Updated 20251109_123831

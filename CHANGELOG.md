@@ -19,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Enhanced README with better documentation structure
 - Improved error handling and logging
-- Updated PowerCLI compatibility requirements
 
 ### Fixed
 - Minor bug fixes in device detection logic
@@ -37,7 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved output formatting with cleaner table display
 - Enhanced advanced settings validation logic
 - Better error handling for vCenter connectivity issues
-- Updated DoD STIG compliance checks to latest standards
 
 ### Fixed
 - Fixed issue with vTPM detection on certain VM configurations
@@ -113,4 +111,3 @@ Special thanks to all contributors who helped make these releases possible:
 
 ---
 
-For more detailed information about each release, visit the [GitHub Releases](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/releases) page.# Updated 20251109_123831
