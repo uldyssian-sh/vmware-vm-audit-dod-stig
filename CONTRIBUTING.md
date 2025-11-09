@@ -152,7 +152,6 @@ Describe "Get-AdvValue" {
 ### PR Requirements
 - [ ] All tests pass
 - [ ] Code follows style guidelines
-- [ ] Documentation updated
 - [ ] No breaking changes (or clearly documented)
 - [ ] Commit messages are descriptive
 
