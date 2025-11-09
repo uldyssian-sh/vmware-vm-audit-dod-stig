@@ -86,3 +86,4 @@ Connect-VIServer -Server your-vcenter.domain.com
 - Check [Configuration Examples](../examples/)
 - Read [Best Practices](../docs/BEST_PRACTICES.md)# Updated Sun Nov  9 12:49:29 CET 2025
 # Updated Sun Nov  9 12:52:36 CET 2025
+# Updated Sun Nov  9 12:56:11 CET 2025

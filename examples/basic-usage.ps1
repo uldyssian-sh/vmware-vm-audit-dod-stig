@@ -44,3 +44,4 @@ Write-Output "Total VMs audited: $totalVMs"
 Write-Output "Compliant VMs: $compliantVMs"
 Write-Output "Non-compliant VMs: $($totalVMs - $compliantVMs)"
 Write-Output "Compliance rate: $complianceRate%"# Updated Sun Nov  9 12:52:36 CET 2025
+# Updated Sun Nov  9 12:56:11 CET 2025

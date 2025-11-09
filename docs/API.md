@@ -145,3 +145,4 @@ The script includes comprehensive error handling for:
 - **3**: vCenter connection failed
 - **4**: VM not found (when using -VMName)# Updated Sun Nov  9 12:49:29 CET 2025
 # Updated Sun Nov  9 12:52:36 CET 2025
+# Updated Sun Nov  9 12:56:11 CET 2025
