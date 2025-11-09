@@ -168,4 +168,4 @@ Now that you're up and running:
 
 ---
 
-**Congratulations!** 🎉 You've successfully completed your first VMware DoD STIG audit. The tool is now ready for regular use in your environment.
+**Congratulations!** 🎉 You've successfully completed your first VMware DoD STIG audit. The tool is now ready for regular use in your environment.# Updated Sun Nov  9 12:49:29 CET 2025

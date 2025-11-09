@@ -143,4 +143,4 @@ The script includes comprehensive error handling for:
 - **1**: General error
 - **2**: PowerCLI module not found
 - **3**: vCenter connection failed
-- **4**: VM not found (when using -VMName)
+- **4**: VM not found (when using -VMName)# Updated Sun Nov  9 12:49:29 CET 2025
