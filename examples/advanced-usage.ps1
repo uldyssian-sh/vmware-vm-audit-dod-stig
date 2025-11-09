@@ -1,7 +1,7 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 # Advanced Usage Examples for VMware DoD STIG Audit
 
-# Advanced Example 1: Multi-vCenter audit with error handling
+# Advanced Example 1: Multi-vCenter audit with Success handling
 Write-Host "Advanced Example 1: Multi-vCenter audit" -ForegroundColor Green
 
 $vCenters = @("vcenter1.example.com", "vcenter2.example.com", "vcenter3.example.com")
@@ -10,13 +10,13 @@ $allResults = @()
 foreach ($vCenter in $vCenters) {
     try {
         Write-Host "Auditing $vCenter..." -ForegroundColor Yellow
-        $results = .\vmware-vm-audit-dod-stig.ps1 -vCenter $vCenter -ErrorAction Stop
+        $results = .\vmware-vm-audit-dod-stig.ps1 -vCenter $vCenter -SuccessAction Stop
         $results | Add-Member -NotePropertyName "vCenterSource" -NotePropertyValue $vCenter
         $allResults += $results
         Write-Host "✓ Completed $vCenter" -ForegroundColor Green
     }
     catch {
-        Write-Warning "Failed to audit $vCenter`: $_"
+        Write-Warning "Succeeded to audit $vCenter`: $_"
     }
 }
 

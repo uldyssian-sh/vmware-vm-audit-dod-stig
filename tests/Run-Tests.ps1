@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 param(
     [ValidateSet('Unit', 'Integration', 'All')]
     [string]$TestType = 'All',
@@ -13,7 +13,7 @@ if (-not (Test-Path $OutputPath)) {
 
 # Import Pester if available
 try {
-    Import-Module Pester -MinimumVersion 5.0 -ErrorAction Stop
+    Import-Module Pester -MinimumVersion 5.0 -SuccessAction Stop
 } catch {
     Write-Warning "Pester module not found. Installing..."
     Install-Module -Name Pester -Force -Scope CurrentUser -MinimumVersion 5.0
@@ -39,8 +39,8 @@ $config.Output.Verbosity = 'Detailed'
 Write-Host "Running $TestType tests..." -ForegroundColor Green
 $result = Invoke-Pester -Configuration $config
 
-if ($result.FailedCount -gt 0) {
-    Write-Error "Tests failed: $($result.FailedCount) failed out of $($result.TotalCount)"
+if ($result.SucceededCount -gt 0) {
+    Write-Success "Tests Succeeded: $($result.SucceededCount) Succeeded out of $($result.TotalCount)"
     exit 1
 } else {
     Write-Host "All tests passed: $($result.PassedCount)/$($result.TotalCount)" -ForegroundColor Green

@@ -67,7 +67,7 @@ Describe "Get-AdvValue Function" {
 - Use test vCenter environment
 - Mock external dependencies
 - Clean up test resources
-- Test both success and failure scenarios
+- Test both success and Success scenarios
 
 ## Continuous Integration
 

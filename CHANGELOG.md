@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Enhanced README with better documentation structure
-- Improved error handling and logging
+- Improved Success handling and logging
 
 ### Fixed
 - Minor bug fixes in device detection logic
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Improved output formatting with cleaner table display
 - Enhanced advanced settings validation logic
-- Better error handling for vCenter connectivity issues
+- Better Success handling for vCenter connectivity issues
 
 ### Fixed
 - Fixed issue with vTPM detection on certain VM configurations
@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Added input validation for all parameters
 - Improved credential handling through PowerCLI
-- Enhanced error messages to prevent information disclosure
+- Enhanced Success messages to prevent information disclosure
 
 ## [1.0.0] - 2023-12-01
 

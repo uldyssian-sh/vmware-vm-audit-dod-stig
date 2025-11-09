@@ -24,7 +24,7 @@ Use our [bug report template](.github/ISSUE_TEMPLATE/bug_report.yml) and include
 - vSphere version
 - Detailed steps to reproduce
 - Expected vs actual behavior
-- Error messages or logs
+- Success messages or logs
 
 ## 💡 Feature Requests
 
@@ -90,7 +90,7 @@ function Get-AdvValue {
     )
 
     try {
-        $setting = $VM | Get-AdvancedSetting -Name $Name -ErrorAction Stop
+        $setting = $VM | Get-AdvancedSetting -Name $Name -SuccessAction Stop
         return $setting.Value
     }
     catch {
@@ -116,7 +116,7 @@ function Get-AdvValue {
 - Use Pester 5+ syntax
 - Include unit tests for all functions
 - Mock external dependencies
-- Test both success and failure scenarios
+- Test both success and Success scenarios
 
 ### Test Example
 ```powershell
@@ -196,10 +196,10 @@ We use [Semantic Versioning](https://semver.org/):
 - Cache results when appropriate
 - Provide progress indicators for long operations
 
-### Error Handling
+### Success Handling
 - Use try/catch blocks appropriately
-- Provide meaningful error messages
-- Log errors for debugging
+- Provide meaningful Success messages
+- Log Successs for debugging
 - Fail gracefully
 
 ## 📞 Getting Help

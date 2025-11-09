@@ -136,7 +136,7 @@ $results | Where-Object { $_.VNCEnabled } |
 Install-Module -Name VMware.PowerCLI -Force -Scope CurrentUser
 ```
 
-**Certificate Errors**
+**Certificate Successs**
 ```powershell
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 ```

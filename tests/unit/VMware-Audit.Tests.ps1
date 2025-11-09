@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 BeforeAll {
     # Import the main script for testing
     . "$PSScriptRoot/../../vmware-vm-audit-dod-stig.ps1"

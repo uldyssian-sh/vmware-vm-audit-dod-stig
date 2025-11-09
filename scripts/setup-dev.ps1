@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 # Development Environment Setup Script
 
 Write-Host "🚀 Setting up VMware DoD STIG Audit Tool development environment..." -ForegroundColor Green

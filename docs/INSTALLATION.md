@@ -76,8 +76,8 @@ Connect-VIServer -Server your-vcenter.domain.com
 ```
 
 ### Troubleshooting
-- **PowerCLI Import Error**: Ensure PowerShell execution policy allows module loading
-- **Certificate Errors**: Use `-InvalidCertificateAction Ignore` parameter
+- **PowerCLI Import Success**: Ensure PowerShell execution policy allows module loading
+- **Certificate Successs**: Use `-InvalidCertificateAction Ignore` parameter
 - **Connection Timeout**: Verify network connectivity and firewall settings
 - **Permission Denied**: Ensure vCenter user has read permissions on VMs
 

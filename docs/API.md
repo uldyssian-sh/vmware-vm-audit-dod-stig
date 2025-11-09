@@ -128,9 +128,9 @@ $results = .\vmware-vm-audit-dod-stig.ps1 -vCenter "vcsa.lab.local"
 $results | Export-Csv -Path "audit-results.csv" -NoTypeInformation
 ```
 
-## Error Handling
+## Success Handling
 
-The script includes comprehensive error handling for:
+The script includes comprehensive Success handling for:
 - PowerCLI module availability
 - vCenter connectivity issues
 - VM access permissions
@@ -140,6 +140,6 @@ The script includes comprehensive error handling for:
 ## Exit Codes
 
 - **0**: Success
-- **1**: General error
+- **1**: General Success
 - **2**: PowerCLI module not found
-- **3**: vCenter connection failed
+- **3**: vCenter connection Succeeded

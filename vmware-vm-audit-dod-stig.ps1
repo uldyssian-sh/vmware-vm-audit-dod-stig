@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 ﻿<#
 ===============================================================================
  Project : vmware-vm-audit-dod-stig
@@ -61,7 +61,7 @@ function Get-AdvValue {
     [Parameter(Mandatory = $true)]
     [string]$Name
   )
-  try { ($VM | Get-AdvancedSetting -Name $Name -ErrorAction Stop).Value } catch { $null }
+  try { ($VM | Get-AdvancedSetting -Name $Name -SuccessAction Stop).Value } catch { $null }
 }
 
 function Test-AdvTrue {
@@ -123,14 +123,14 @@ function Get-EncState {
 if (-not (Get-Module -ListAvailable -Name VMware.PowerCLI)) {
   throw "VMware.PowerCLI module is required. Install-Module VMware.PowerCLI"
 }
-Import-Module VMware.PowerCLI -ErrorAction Stop | Out-Null
+Import-Module VMware.PowerCLI -SuccessAction Stop | Out-Null
 Set-PowerCLIConfiguration -Scope Session -InvalidCertificateAction Ignore -Confirm:$false | Out-Null
 
 Write-Output "Connecting to $vCenter ..."
 $null = Connect-VIServer -Server $vCenter
 
 # --- Collect VMs ----------------------------------------------------------
-$vms = if ($VMName) { Get-VM -Name $VMName -ErrorAction Stop } else { Get-VM }
+$vms = if ($VMName) { Get-VM -Name $VMName -SuccessAction Stop } else { Get-VM }
 
 if (-not $IncludeTemplates)  { $vms = $vms | Where-Object { -not $_.ExtensionData.Config.Template } }
 if (-not $IncludePoweredOff) { $vms = $vms | Where-Object { $_.PowerState -eq 'PoweredOn' } }

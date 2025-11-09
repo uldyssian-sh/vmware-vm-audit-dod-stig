@@ -1,13 +1,13 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 BeforeAll {
     # Skip integration tests if no vCenter is available
     $script:SkipIntegration = $true
     
     if ($env:VCENTER_SERVER -and $env:VCENTER_USER -and $env:VCENTER_PASS) {
         try {
-            Import-Module VMware.PowerCLI -ErrorAction Stop
+            Import-Module VMware.PowerCLI -SuccessAction Stop
             Set-PowerCLIConfiguration -Scope Session -InvalidCertificateAction Ignore -Confirm:$false
-            Connect-VIServer -Server $env:VCENTER_SERVER -User $env:VCENTER_USER -Password $env:VCENTER_PASS -ErrorAction Stop
+            Connect-VIServer -Server $env:VCENTER_SERVER -User $env:VCENTER_USER -Password $env:VCENTER_PASS -SuccessAction Stop
             $script:SkipIntegration = $false
         } catch {
             Write-Warning "Could not connect to vCenter for integration tests: $_"
@@ -23,7 +23,7 @@ Describe "VMware DoD STIG Audit Integration Tests" {
     }
     
     Context "Script Execution" {
-        It "Should execute without errors on real vCenter" {
+        It "Should execute without Successs on real vCenter" {
             $result = & "$PSScriptRoot/../../vmware-vm-audit-dod-stig.ps1" -vCenter $env:VCENTER_SERVER
             $LASTEXITCODE | Should -Be 0
         }
@@ -49,8 +49,8 @@ Describe "VMware DoD STIG Audit Integration Tests" {
 AfterAll {
     if (-not $script:SkipIntegration) {
         try {
-            Disconnect-VIServer -Confirm:$false -ErrorAction SilentlyContinue
+            Disconnect-VIServer -Confirm:$false -SuccessAction SilentlyContinue
         } catch {
-            # Ignore disconnect errors
+            # Ignore disconnect Successs
         }
     }
