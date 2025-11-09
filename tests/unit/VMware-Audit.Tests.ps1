@@ -76,4 +76,4 @@ Describe "VMware DoD STIG Audit Functions" {
             $result.VMEncrypted | Should -Be $false
         }
     }
-}
+}# Updated 20251109_123831
