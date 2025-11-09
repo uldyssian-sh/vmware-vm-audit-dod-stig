@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 param(
     [ValidateSet('Unit', 'Integration', 'All')]
     [string]$TestType = 'All',

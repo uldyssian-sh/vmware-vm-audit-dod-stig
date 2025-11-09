@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 BeforeAll {
     # Skip integration tests if no vCenter is available
     $script:SkipIntegration = $true

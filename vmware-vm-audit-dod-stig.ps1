@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 ﻿<#
 ===============================================================================
  Project : vmware-vm-audit-dod-stig

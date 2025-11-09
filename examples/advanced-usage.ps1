@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 # Advanced Usage Examples for VMware DoD STIG Audit
 
 # Advanced Example 1: Multi-vCenter audit with error handling
