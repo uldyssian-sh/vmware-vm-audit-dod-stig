@@ -4,8 +4,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
 [![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/stargazers)
 [![Test](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/Test/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
-[![PowerShell Gallery](https://img.shields.io/badge/PowerShell-Gallery-blue.svg)](https://www.powershellgallery.com/)
-[![VMware Compatibility](https://img.shields.io/badge/VMware-vSphere%208.0-green.svg)](https://www.vmware.com/products/vsphere.html)
 [![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
 
 ## 📋 Overview
