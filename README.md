@@ -1,21 +1,6 @@
 # VMware VM DoD STIG Audit Tool
 
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 
-[![GitHub license](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/issues)
-[![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-vm-audit-dod-stig)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/stargazers)
-[![Test](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/workflows/Test/badge.svg)](https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig/actions)
-[![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
 
 ## 📋 Overview
 
@@ -63,18 +48,6 @@ PowerShell-based audit tool for VMware vSphere 8 Virtual Machine configurations 
 
 ```powershell
 # Clone the repository
-
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
-
-[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
-[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-vm-audit-dod-stig?style=flat-square)](#)
-[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 git clone https://github.com/uldyssian-sh/vmware-vm-audit-dod-stig.git
 cd vmware-vm-audit-dod-stig
 
